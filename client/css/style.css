@@ -1,0 +1,574 @@
+* {
+    font-family: 'Lato', sans-serif; 
+}
+
+html {
+    background-color: #222;
+    overflow-x: hidden;
+    margin-left: calc(100vw - 100%);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: #191d23;
+}
+
+::-webkit-scrollbar-thumb {
+    /*background-color: #B9996B;*/
+    background-color: #04a276;
+    opacity: 0.5%;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #15b387;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+/* ------------ background image styles ------------ */
+#background-image {
+    opacity: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    display: block;
+
+    background-image: url("../img/ArtOfMagic-Zendikar.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 100vw;
+    height: 100%;
+
+    -webkit-filter: brightness(.425);
+    -moz-filter: brightness(.425);
+    -o-filter: brightness(.425);
+    -ms-filter: brightness(.425);
+    filter: brightness(.425);
+}
+
+/* ------------ set any preloaded image tags to not display ------------ */
+.imgLoad {
+    display: none;
+}
+
+/* ------------ to keep content at a locked width - helps with media queries ------------ */
+.content-width-lock {
+    width: 1200px;
+}
+
+/* ------------ header styles ------------ */
+#header {
+    text-align: center;
+    width: 100%;
+    height: auto;
+    padding: 40px 0 20px 0;
+    display: none;
+}
+
+#header-logo img {
+    width: 128px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#header-title {
+    font-size: 4em;
+    color: #eee;
+    letter-spacing: 1px;
+    margin: 0 auto;
+}
+
+#about-help-button {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 15px;
+}
+
+#back-home-button {
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding: 15px;
+}
+
+#back-home-button a {
+    text-decoration: none;
+}
+
+#about-help-button p:hover, #back-home-button p:hover {
+    cursor: pointer;
+}
+
+#about-help {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 7;
+
+    background-color: rgba(90,90,90, 0.95);
+}
+
+#about-help #about-help-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#about-help-innerWrapper {
+    width: 900px;
+    height: 490px;
+    margin: auto;
+    position: relative;
+}
+
+#help {
+    display: flex;
+    flex-direction: column;
+}
+
+#help-header {
+    margin: 0 auto 40px auto;
+}
+
+table {
+    text-align: left;
+    margin: 0 auto 20px auto;
+}
+
+.th-center {
+    text-align: center;
+}
+
+table span, .flag-info span {
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 400;
+}
+
+table .right-align {
+    text-align: right;
+}
+
+th {
+    padding: 0 5px 0 5px;
+}
+
+.flag-info p {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+#about {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#about p {
+    padding: 0;
+    margin: 0;
+}
+
+#mid-info-separator {
+    padding: 10px 0;
+}
+
+/* ------------ form styles ------------ */
+
+#search {
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 10px;
+    display: none;
+}
+
+#search-card {
+    position: relative;
+    padding: 0;
+    margin: 0 auto;
+    display: block;
+    width: 256px;
+    height: auto;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #ccc;
+}
+
+input:focus {
+    outline: none;
+}
+
+input[type=text] {
+    color: #444;
+    font-size: 1em;
+    width: 100%;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    border: 2px solid #aaa;
+    border-radius: 1px;
+    transition: .2s ease-in-out;
+}
+
+input[type=text]:focus {
+    border: 2px solid #444;
+}
+
+input[type=submit] {
+    font-size: 1em;
+    color: #eee;
+    background-color: #039165;
+    width: 60%;
+    padding: 15px 15px 15px 15px;
+    box-sizing: border-box;
+    border-radius: 1px;
+    margin-bottom: 25px;
+    border: none;
+    margin-top: 10px;
+    transition: .2s ease-in-out;
+}
+
+input[type=submit]:hover {
+    background-color: #04a276;
+    cursor: pointer;
+}
+
+#speech {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    right: 10px;
+    top: 10px;
+    opacity: .3;
+    transition: .2s ease-in-out;
+}
+
+#speech:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+
+/* ----------- results styling ----------- */
+#result-wrapper {
+    position: relative;
+    margin: 0 auto;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+}
+
+.count-results {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: #aaa;
+}
+
+#result {
+    color: #aaa;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.cardRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.cardRowItem {
+    position: relative;
+    width: 350px;
+    padding: 15px;
+    height: auto;
+    text-align: center;
+    z-index: 1;
+    filter: brightness(.5);
+    transition: .2s ease-in-out;
+}
+
+.cardRowItem:hover {
+    background-color: rgba(50,50,50,0.6);
+    filter: brightness(1);
+    cursor: pointer;
+}
+
+.cardItemImage {
+    width: 100%;
+    height: auto;
+}
+
+.cardItemImage img {
+    max-width: 350px;
+}
+
+.cardItemName {
+    font-size: 1em;
+    text-align: center;
+}
+
+.cardItemDesc {
+    font-style: italic;
+    font-size: .8em;
+}
+
+.gradient-div {
+    z-index: -1;
+    position: absolute;
+    display: none;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.click-collider {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cardExpandedData {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card-summary {
+    display: flex;
+    width: 400px;
+    color: #bbb;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-summary-data {
+
+}
+
+.card-info {
+    width: 400px;
+    color: #bbb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-info-data {
+
+}
+
+#footer {
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    opacity: 0;
+    z-index: 7;
+}
+
+#footer-main div {
+    display: inline-flex;
+    flex-direction: row;
+    padding: 0 10px;
+}
+
+.footer-sizes {
+    font-weight: 600;
+    opacity: .4;
+    letter-spacing: 1px;
+    padding: 0;
+    margin: 0;
+}
+
+#footer.relativeIt {
+    position: relative;
+    margin-top: 25px;
+}
+
+.footer-p {
+    color: #aaa;
+}
+
+.footer-a {
+    text-decoration: none;
+    color: #039165;
+    transition: .2s ease-in-out;
+}
+
+.footer-a:hover {
+    color: #04a276;
+    opacity: 1;
+}
+
+#status {
+    position: fixed;
+    width: 100%;
+    display: none;
+    text-align: center;
+}
+
+#statusMessage {
+    color: #eee;
+    font-weight: 600;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* --------- Loader animations and stuff --------- */
+
+#loader-wrapper {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+
+#loader-trough {
+    width: 250px;
+    height: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(128,128,128,0.6)    
+}
+
+#loader {
+    height: 100%;
+    background-color: #04a276;
+
+    -webkit-animation: load .20s ease infinite;
+    animation: load .20s ease infinite;
+}
+
+@-webkit-keyframes load {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes load {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* --------------- MEDIA QUERIES ------------- */
+
+@media screen and (max-width: 1199px) {
+    .content-width-lock {
+        width: 750px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .content-width-lock {
+        width: 90%;
+    }
+
+    #header-logo img {
+        width: 256px;
+    }
+
+    #header-title {
+        font-size: 7em;
+    }
+
+    #search-card {
+        width: 450px;
+        margin: 0 auto;
+    }
+
+    input[type=text] {
+        font-size: 2em;
+        height: 2.3em;
+        padding: 4px 10px;
+        margin-bottom: 15px;
+    }
+
+    input[type=submit] {
+        font-size: 2.5em;
+        color: #eee;
+        background-color: #039165;
+        width: 80%;
+    }
+
+    #result {
+        color: #aaa;
+        margin: 0 auto;
+        padding: 10px;
+    }
+
+    .cardRow {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .cardRowItem {
+        width: 100%;
+        height: auto;
+        padding: 75px 0 35px 0;
+    }
+
+    .cardItemImage img {
+        width: 75%;
+        height: auto;
+    }
+
+    .cardItemName {
+        font-size: 2em;
+    }
+
+    .cardItemDesc {
+        font-size: 1.5em;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .footer-sizes {
+        font-size: 2em;
+    }
+}

@@ -1,0 +1,157 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <title>QueryMTG</title>
+
+        <meta charset="UTF-8">
+        <meta name="description" content="Find what you're looking for when it comes to Magic: The Gathering!">
+        <meta name="keywords" content="magic the gathering,mtg,magic games,magic card game,mtg card search,card search,cards,tcg">
+        <meta name="author" content="Rowan Waring">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="img/logo-black.png"/>
+
+        <!-- get dat jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <!-- client side javascript -->
+        <script src="js/client.js"></script>
+    </head>
+
+    <!-- THE PAGE -->
+    <body>
+        <!-- background image container -->
+        <div id="background-image"></div>
+
+        <!-- page title // images // etc -->
+        <div id="header">
+            <div id="header-logo">
+                <img id="logo-img" class="imgLoad" src="img/logo-white.png" alt="logo" />
+            </div>
+            <h2 id="header-title">QueryMTG</h2>
+
+            <div id="about-help-button">
+                <p class="footer-sizes footer-a">about/help</p>
+            </div>
+            
+            <div id="back-home-button">
+                <a href="https://www.rowanwaring.com/"><p class="footer-sizes footer-a">rowanwaring.com</p></a>
+            </div>
+        </div>
+
+        <!-- forms -->
+        <div id="search" class="content-width-lock">
+            <div id="search-card">
+                <form id="mtgSearchForm" action="/mtgSearch" method="get">
+                    <input id="queryText" type="text" name="name" placeholder="ex: krosan cloudscraper" autocomplete="off">
+                    <input id="querySubmit" type="submit" value="Search">
+                </form>
+
+                <i class="fas fa-microphone" id="speech"></i>
+            </div>
+        </div>
+
+        <div id="status">
+            <p id="statusMessage">No search data given!</p>
+        </div>
+
+        <!-- loader animation -->
+        <div id="loader-wrapper">
+            <div id="loader-trough">
+                <div id="loader"></div>
+            </div>
+        </div>
+
+        <!-- we're gonna put data here -->
+        <div id="result-wrapper" class="content-width-lock">
+            <div class="count-results">
+                <p id="count-text"></p>
+            </div>
+            <div id="result">
+
+            </div>
+        </div>
+
+        <!-- about/help -->
+        <div id="about-help">
+            <div id="about-help-wrapper">
+                <div id="about-help-innerWrapper">
+                    <div id="help">
+                        <h2 id="help-header">Advanced search info:</h2>
+                        <div id="table-div">
+                            <table>
+                                <tr><th class="th-center" colspan="5">Search Flags</th></tr>
+                                <tr class="help-flag">
+                                    <th>Name</th><th class="right-align"><span>n:</span></th><th>ex:&emsp;</th><th class="right-align"><span>n:</span></th><th><span>hearthfire goblin</span></th>
+                                </tr>
+                                <tr class="help-flag">
+                                    <th>Color</th><th class="right-align"><span>c:</span></th><th>ex:&emsp;</th><th class="right-align"><span>c:</span></th><th><span>red</span></th>
+                                </tr>
+                                <tr class="help-flag">
+                                    <th>Type</th><th class="right-align"><span>t:</span></th><th>ex:&emsp;</th><th class="right-align"><span>t:</span></th><th><span>artifact</span></th>
+                                </tr>
+                                <tr class="help-flag">
+                                    <th>Power</th><th class="right-align"><span>pw:</span></th><th>ex:&emsp;</th><th class="right-align"><span>pw:</span></th><th><span>5</span></th>
+                                </tr>
+                                <tr class="help-flag">
+                                    <th>Toughness</th><th class="right-align"><span>tn:</span></th><th>ex:&emsp;</th><th class="right-align"><span>tn:</span></th><th><span>3</span></th>
+                                </tr>
+                                <tr class="help-flag">
+                                    <th>Set</th><th  class="right-align"><span>s:</span></th><th>ex:&emsp;</th><th class="right-align"><span>s:</span></th><th><span>betrayers of kamigawa</span></th>
+                                </tr>
+                                <tr class="help-flag">
+                                    <th>Rarity</th><th class="right-align"><span>r:</span></th><th>ex:&emsp;</th><th class="right-align"><span>r:</span></th><th><span>mythic rare</span></th>
+                                </tr>
+                                <tr class="help-flag">
+                                    <th>Artist</th><th class="right-align"><span>a:</span></th><th>ex:&emsp;</th><th class="right-align"><span>a:</span></th><th><span>lindsey look</span></th>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="flag-info">
+                            <p>Can also mix and match any flags together, ex:&emsp;<span>a:adam rex c:black pw:2 tn:2 s:odyssey</span></p>
+                            <p id="mid-info-separator">Additionally, you can specify two different logical delimiters to further define searches - the pipe '|' (or) and the comma ',' (and), ex:&emsp;<span>c:black|red</span>&emsp;will return cards that are black OR red, and&emsp;<span>c:black,red</span>&emsp;will return cards that are black AND red.</p>
+                            <p><i>If no flag is provided, search defaults to by card name.</i></p>
+                        </div>
+                    </div>
+                    <div id="about">
+                        <div>
+                            <p>This site is in no way affiliated with, endorsed, or supported by Wizards of the Coast</p>
+                        </div>
+                        <div>
+                            <p>Background image from: "The Art of Magic: The Gathering - Zendikar", pages 92-93</p>
+                        </div>
+                        <div>
+                            <P><i>Note: Alas, images loaded dynamically will not appear if using this app over HTTPS</i></p>
+                        </div>
+						<div>
+                            <p>Created for educational purposes - <a class="footer-a" href="https://github.com/theTreeSerok/QueryMTG" target="_blank">visit the github repo</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div id="footer">
+            <div id="footer-main">
+                <div id="footer-hero">
+                    <p class="footer-sizes footer-p">built by&nbsp;</p>
+                    <a class="footer-sizes footer-a" href="https://twitter.com/theTreeSerok" target="_blank">rowan waring</a>
+                </div>
+                <div id="footer-credit">
+                    <p class="footer-sizes footer-p">powered by&nbsp;</p>
+                    <a class="footer-sizes footer-a" href="https://magicthegathering.io/" target="_blank">magicthegathering.io</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- image preload -->
+        <img class="imgLoad" src="img/ArtOfMagic-Zendikar.jpg" alt="background image" />
+    </body>
+</html>
