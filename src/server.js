@@ -46,7 +46,12 @@ function onRequest(req, res) {
             // make a request to the url and pipe (feed) the returned ajax call to our client response
             // we don't know for sure what image type we'll get back, so let's just use what's given dynamically
             requestHandler.get(imgUrl).on('response', function(mtgResponse) {
-                res.writeHead(200, { "Content-type": mtgResponse.headers["content-type"] });
+                if (mtgResponse.headers["content-type"] == undefined) {
+                    res.writeHead(200, { "Content-Type": "image/png" });
+                }
+                else {
+                    res.writeHead(200, { "Content-Type": mtgResponse.headers["content-type"] });
+                }
             }).pipe(res);
         }
         catch(exception) {

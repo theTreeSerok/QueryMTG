@@ -101,14 +101,16 @@ function expandCard(e) {
             var imageContainer = document.createElement('div');
             imageContainer.style.textAlign = "center";
 
-            var image = document.createElement('img');
-            $(image).attr("src", cardImage);
-            $(image).attr("alt", cardImage);
-            $(image).css("width", "300px");
-            $(image).css("height", "auto");
-            imageContainer.append(image);
-
-            cardSummaryData.append(imageContainer);
+            if (!cardImage.includes("undefined")) {
+                var image = document.createElement('img');
+                $(image).attr("src", cardImage);
+                $(image).attr("alt", cardImage);
+                $(image).css("width", "300px");
+                $(image).css("height", "auto");
+                
+                imageContainer.append(image);
+                cardSummaryData.append(imageContainer);
+            }
 
             var nameElement = document.createElement('p');
             nameElement.textContent = cardName;
@@ -421,9 +423,11 @@ function setCards(searchData) {
             $(divImage).addClass('cardItemImage')
 
             // create img element and assign it's src to the imageUrl of it's card
-            imgCard = document.createElement('img'); // img within it's wrapper 
-            $(imgCard).attr("src", dataImageUrl);
-            divImage.append(imgCard);
+            if (!dataImageUrl.includes("undefined")) {
+                imgCard = document.createElement('img'); // img within it's wrapper 
+                $(imgCard).attr("src", dataImageUrl);
+                divImage.append(imgCard);
+            }
 
             // create name paragraph element and set it's text to the name of it's card
             pName = document.createElement('p'); // card name paragraph
@@ -455,7 +459,7 @@ function setCards(searchData) {
             // add latest row item to the row
             row.append(rowItems[currentMod]);
         }
-        
+
         var resultsText = '';
 
         if (cardsUsed == 1) {
@@ -464,7 +468,7 @@ function setCards(searchData) {
         else {
             resultsText = cardsUsed + " results found";
         }
-        
+
         // set results counter text to amount of cards displayed
         $("#count-text").text(resultsText);
     }
@@ -645,7 +649,7 @@ $(document).ready(function() {
 
         // fade out any old query results
         $("#result-wrapper").fadeOut(350);
-        
+
 
         // get form data for the AJAX request
         var action = $("#mtgSearchForm").attr("action");
