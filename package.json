@@ -14,6 +14,7 @@
     "author": "Rowan Waring",
     "license": "UNLICENSED",
     "dependencies": {
-        "mtgsdk": "^0.3.0"
+        "mtgsdk": "^0.3.0",
+        "request": "^2.88.0"
     }
 }

@@ -322,7 +322,8 @@ function setCards(searchData) {
         for(var currentCard = 0; currentCard < searchData.length; currentCard++) {
             var currentMod = cardsUsed % 3;
 
-            var dataImageUrl = searchData[currentCard].imageUrl; // image
+            //console.dir(window.location);
+            var dataImageUrl = window.location.origin + '/multiverseid?' + searchData[currentCard].multiverseid; // proxy image request
             var dataName = searchData[currentCard].name; // name
             var dataArtist = searchData[currentCard].artist; // artist
             var dataDesc = searchData[currentCard].text; // description/text
@@ -457,7 +458,7 @@ function setCards(searchData) {
         var resultsText = '';
 
         if (cardsUsed == 1) {
-            resultsText = "1 result found";
+            resultsText = cardsUsed + " result found";
         }
         else {
             resultsText = cardsUsed + " results found";
@@ -643,8 +644,7 @@ $(document).ready(function() {
 
         // fade out any old query results
         $("#result-wrapper").fadeOut(350);
-
-
+        
 
         // get form data for the AJAX request
         var action = $("#mtgSearchForm").attr("action");

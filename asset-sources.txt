@@ -1,0 +1,22 @@
+Background image: 
+- "The Art of Magic the Gathering: Zendikar"
+- https://nerdreactor.com/wp-content/uploads/2016/02/ArtOfMagic-Zendikar-p92_93.jpg
+
+Logo image:
+- Path of Exile site
+- https://s3-us-west-2.amazonaws.com/echomage/symbols/sets/pWPN.png
+
+Alphabetical array sort:
+- https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
+
+Voice recognition implementation:
+- https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API
+
+Microphone icon:
+- https://fontawesome.com/icons/microphone?style=solid
+
+API:
+- https://magicthegathering.io/
+
+API Wrapper: 
+- https://github.com/MagicTheGathering/mtg-sdk-javascript

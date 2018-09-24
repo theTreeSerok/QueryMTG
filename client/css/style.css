@@ -324,6 +324,7 @@ input[type=submit]:hover {
 
 .cardItemImage img {
     max-width: 350px;
+    max-height: 310px;
 }
 
 .cardItemName {

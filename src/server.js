@@ -2,6 +2,7 @@ var http = require('http');
 var url = require('url');
 var query = require('querystring');
 var fs = require('fs');
+var requestHandler = require('request');
 
 // developer sdk found at: https://github.com/MagicTheGathering/mtg-sdk-javascript
 const mtg = require('mtgsdk');
@@ -17,14 +18,56 @@ var bgImg = fs.readFileSync(__dirname + '/../client/img/ArtOfMagic-Zendikar.jpg'
 var wLogo = fs.readFileSync(__dirname + '/../client/img/logo-white.png');
 var bLogo = fs.readFileSync(__dirname + '/../client/img/logo-black.png');
 
+var responseHeaders = {  
+    "access-control-allow-origin": "*",
+    "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "access-control-allow-headers": "Content-Type, accept",
+    "access-control-max-age": 10,
+    "Content-Type": "application/json"
+};
+
 function onRequest(req, res) {
     var parsedUrl = url.parse(req.url);
     var params = query.parse(parsedUrl.query);
+    //console.log(parsedUrl);
 
     // if the url contains mtgSearch, signifying a query, allow that
     if(parsedUrl.pathname === "/mtgSearch") {
         mtgSearch(req, res, params);
     }
+    
+    // proxy images to be able to serve over https
+    else if(parsedUrl.pathname.includes("/multiverseid")) {
+        var idQuery = req.url.split('?')[1];
+        
+        try{
+            var imgUrl = "http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=" + idQuery;
+
+            // make a request to the url and pipe (feed) the returned ajax call to our client response
+            // we don't know for sure what image type we'll get back, so let's just use what's given dynamically
+            requestHandler.get(imgUrl).on('response', function(mtgResponse) {
+                res.writeHead(200, { "Content-type": mtgResponse.headers["content-type"] });
+            }).pipe(res);
+        }
+        catch(exception) {
+            console.dir(exception);
+            
+            // write a 500 error out
+            response.writeHead(500, responseHeaders);
+
+            // json error message to respond with
+            var responseMessage = {
+                message: "Error connecting to server. Check url and arguments for proper formatting"
+            }
+
+            // stringify JSON message and write it to response
+            response.write(JSON.stringify(responseMessage));
+
+            // send response
+            response.end();
+        }
+    }
+	
     // all other requests are probably client resources
     else if(req.url === ("/js/client.js")) {                    // load client side javascript
         res.writeHead(200, { "Content-Type": "text/javascript" });
@@ -190,7 +233,7 @@ function mtgSearch(req, res, params) {
     // if none, default to searching by name
     if(Object.keys(query).length == 0) {
         mtg.card.where( { name: queryName } ).then(cards => {
-            res.writeHead(200, { "Content-Type": "application/json" });
+            res.writeHead(200, responseHeaders);
             res.write(JSON.stringify(cards));
             res.end();
         }); 
@@ -198,7 +241,7 @@ function mtgSearch(req, res, params) {
     // if flags exist, pass in the query object we built from the flags
     else {
         mtg.card.where(query).then(cards => {
-            res.writeHead(200, { "Content-Type": "application/json" });
+            res.writeHead(200, responseHeaders);
             res.write(JSON.stringify(cards));
             res.end();
         }); 
