@@ -84,7 +84,8 @@ function expandCard(e) {
             // assign local variables to card data, or alt values if applicable
             cardName = card.name || "No card name available";
             cardDesc = card.text || null;
-            cardImage = card.imageUrl || "No card image available";
+            //cardImage = card.imageUrl || "No card image available";
+            cardImage = window.location.origin + '/multiverseid?' + card.multiverseid; // proxy onece more to display securely
             cardColors = card.colors || ["No card colors available"];
             cardSet = card.setName || "No card set available";
             cardType = card.type || "No card type available";
