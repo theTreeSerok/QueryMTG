@@ -85,7 +85,7 @@ function expandCard(e) {
             cardName = card.name || "No card name available";
             cardDesc = card.text || null;
             //cardImage = card.imageUrl || "No card image available";
-            cardImage = window.location.origin + '/multiverseid?' + card.multiverseid; // proxy onece more to display securely
+            cardImage = window.location.origin + '/multiverseid?' + card.multiverseid; // proxy once more to display securely
             cardColors = card.colors || ["No card colors available"];
             cardSet = card.setName || "No card set available";
             cardType = card.type || "No card type available";
